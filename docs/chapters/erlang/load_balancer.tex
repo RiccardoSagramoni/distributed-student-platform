@@ -1,0 +1,39 @@
+In order to fairly distribute the load relative to the chatroom and fully exploits the benefits deriving from a distributed Erlang deploy (such as high availability, fault tolerance, scalability...), a \textit{load balancer} has been deployed on node \texttt{10.2.1.4}.
+
+We chose \textbf{Nginx} for this purpose since it natively supports the WebSocket protocol both as \textbf{reverse proxy} and \textbf{load balancer}, so it's a perfect match for our requirements.
+
+The Nginx server has been configured to listens on port 8300 and to proxy every WebSocket connection to one of the remote chat\_server nodes.
+
+\begin{verbatim}
+worker_processes 1;
+worker_rlimit_nofile 8192;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
+	
+    upstream websocket {
+        server 10.2.1.52:8300;
+        server 10.2.1.31:8300;
+        server 10.2.1.51:8300;
+    }
+	
+    server {
+        listen 8300;
+        location / {
+            proxy_pass http://websocket;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_set_header Host $host;
+        }
+    }
+}
+\end{verbatim}
+

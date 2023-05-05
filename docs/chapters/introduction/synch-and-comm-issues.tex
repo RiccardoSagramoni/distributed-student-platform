@@ -1,0 +1,7 @@
+Let's introduce briefly the main communication and synchronization issues:
+\begin{itemize}
+    \item Multiple clients exchange messages with each other in chat rooms concurrently. The chat of each client node must be synchronized.
+    \item When a student enters or leave the chatroom each client node must be synchronized in order to see a consistent list of students within the chat (i.e. ”online students”).
+    \item When a student books a meeting in an available time slot or remove a previously booked meeting, each client node must be synchronized to view the same consistent state (both for students and professors).
+    \item When a professor creates or delete a course, the server must show the course to all the connected client in the ”browse”, ”search” sections and, in case of deletion, inside the course page.
+\end{itemize}

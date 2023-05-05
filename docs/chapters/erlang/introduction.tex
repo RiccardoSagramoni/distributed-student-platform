@@ -1,0 +1,11 @@
+\begin{figure}[H]
+    \centering
+     \includegraphics[width=1\textwidth]{img/system_architecture/system_architecture.png}
+    \caption{\label{fig:system_architecture} System Architecture Schema.}
+\end{figure}
+
+The web application, as we can see in figure \ref{fig:system_architecture}, consists of a \textbf{Client Application}, a \textbf{Jakarta Application Server}, and \textbf{multiple erlang servers}.\\
+The Jakarta EE Application Server, which implements most of the functionality of the application, uses as its reference implementation, \textbf{Glassfish 6.2.5} and also communicates with a \textbf{MySql relational database} located on a different machine.\\
+The Erlang Servers, which are managed by a \textbf{Load Balancer} on another machine, handle the Chatrooms of the application through an \textbf{HTTP websocket communication}.\\
+For more specific details, all these modules will be analyzed individually.
+\newpage

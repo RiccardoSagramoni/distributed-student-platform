@@ -1,0 +1,43 @@
+In the Maven project \textbf{web}, as said before, we introduced the Servlets and JSP needed. In order to separate each page and keep the logic of each web page divided we implemented a Servlet for each page that will gather the data needed to build the HTML page through JSP technology. In addition, this project contains all the necessary part for displaying resources, so: CSS, JavaScript and the images, everything can be found inside the webapp/assets folder. \\
+Servlets are divided in four main categories based on the type of users to which are dedicated:
+\begin{itemize}
+    \item Professor's servlets
+    \item Student's servlets
+    \item Admin's servlets
+    \item Common servlets
+\end{itemize}
+\ \\
+Each servlet, that don't belong to common category, access session information to check:
+\begin{itemize}
+    \item if the current user has already logged in: otherwise will redirected to login page
+    \item whether the user is in the appropriate category to access that type of resource: otherwise the malicious user will be redirected to his portal page
+\end{itemize}
+Common servlets instead, such as login and logout, don't need these kind of techniques since there is no difference between the resource behaviour and the user category.
+\ \\
+In the end each servlet, upon a request, can call the methods of the EJBs that implement the related application logic obtaining their remote reference through JNDI.\\
+In the table \ref{tab:servlets} there is a list of the Servlets that has been implemented.
+
+\begin{table}[h]
+\centering
+\caption{Servlet List}
+\label{tab:servlets}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Visibility} & \textbf{Servlet Name} & \textbf{Implemented methods} \\ \hline
+All & LoginServlet & POST\\ \hline
+All & LogoutServlet & GET \& POST\\ \hline
+Students & SignUpServlet & GET\\ \hline
+Students & StudentPortalServlet & GET\\ \hline
+Students & ChatroomServlet & GET\\ \hline
+Students & StudentProfileServlet & GET \& POST\\ \hline
+Students & StudentCourseServlet & GET \& POST\\ \hline
+Students & StudentBookingServlet & GET \& POST\\ \hline
+Professor & ProfessorPortalServlet & GET\\ \hline
+Professor & ProfessorMeetingServlet & GET \& POST\\ \hline
+Professor & ProfessorDeleteCourseServlet & GET \& POST\\ \hline
+Professor & ProfessorCreateCourseServlet & GET \& POST\\ \hline
+Admin & AdminCreateProfessorServlet & GET \& POST\\ \hline
+Admin & AdminPortalServlet & GET\\ \hline
+Admin & AdminUserManagementServlet & GET \& POST\\ \hline
+\end{tabular}
+\end{table}

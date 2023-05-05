@@ -1,0 +1,12 @@
+The \textbf{ejb} Maven project, as previously introduced, contains the \textbf{implementation of the classes declared in the ejb-interfaces} with the \textbf{business logic needed} to provide the required functionalities.\\
+The type of the \textbf{EJB class implementation} is \textbf{\textit{Stateless}}.\\
+As we anticipated in the ejb-interfaces section, three ejb were used to implement the business logic of the application:
+\begin{itemize}
+    \item \textbf{BookedMeetingEJBImpl}, this EJB is the \textbf{only one where a DAO was created} for, as it provided business logic \textbf{beyond simply accessing database resources}.\\
+    In fact, this EJB, in addition to retrieving data back from the database, through its DAO methods, grants us the ability to view the entire schedule of a professor's slots and perform various operations on it;
+    \item \textbf{CourseEJBImpl}, This EJB allows us to \textbf{access course data}, it gives us the ability to search through course names and professors, but also to \textbf{perform all these operations applied only to the starred courses} of the specific student.\\
+    We can also insert or delete courses, as well as promote or retract them from the starred status;
+    \item \textbf{UserEJBImpl}, this EJB gives us the ability to manage the \textbf{business logic of the login and of the signup} of the students and their interaction with the db.
+    It also provides operations that can \textbf{alter a user's status}, through banning, or operations such as \textbf{create professor and student search}.
+\end{itemize}
+\newpage

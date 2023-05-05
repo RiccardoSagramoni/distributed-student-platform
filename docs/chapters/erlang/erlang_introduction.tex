@@ -1,0 +1,18 @@
+Within our project, we developed the \textbf{chatroom} functionality in \textit{Erlang}.
+
+In order to take full advantage of Erlang's innate support for concurrency and scalability and to meet out requirements for high availability and fault tolerance, we deployed the chatroom in a \textbf{distributed} manner, on \textit{multiple "server" nodes}. Specifically for this project, we configured three different containers to run their own Erlang instance (\texttt{10.2.1.31}, \texttt{10.2.1.51}, \texttt{10.2.1.52}).
+
+Each individual node exposes an endpoint to connect to the users' browsers via the \textbf{WebSocket} protocol. In this way, the server can receive chat messages from a user and forward them to other online users, meanwhile the user is not required to refresh the webpage.
+
+The Erlang-side WebSocket communication been implemented by leveraging \textbf{Cowboy}, a small, fast and modern HTTP server for Erlang/OTP. This allowed us to focus only on the business logic and the remote deployment, without having to deal with low level HTTP protocols.
+On the other hand, the client-side WebSocket communication has been implement in \textbf{Javascript}.
+Every message exchanged between client and server is serialized in \textbf{JSON format}.
+The \texttt{jsone} library has been used for the Erlang implementation.
+
+Distributed Erlang nodes share chat and user status information through \textbf{Mnesia}, a distributed database, integrated by default into Erlang/OTP and based on ETS (in-memory) and DETS (on-disk) as storage mechanisms.
+
+A \textbf{load balancer} (Nginx) has been also deployed to fairly distribute the incoming WebSocket requests to the available Erlang servers.
+
+The container hosting the load balancer (\texttt{10.2.1.4}) also runs an Erlang process (\textit{master node}) responsible for configuring the Mnesia cluster and spawning the chat server application processes on the remote Erlang nodes.
+
+Finally, \textbf{rebar3} has been used as building tool for the Erlang application.

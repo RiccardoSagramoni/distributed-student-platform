@@ -1,0 +1,10 @@
+In order to correctly configure the Mnesia database and launch the remote Erlang nodes , we developed a \textit{master application} which executes the following operations:
+\begin{itemize}
+    \item It connects to the remote nodes by means of \texttt{net\_kernel:connect\_node/1}.
+    
+    \item It starts its local Mnesia process, creates a persistent schema with the other Erlang nodes (if it doesn't already exist) and creates the \textit{online\_students} table inside the schema (if it doesn't already exist). The new table only resides on the chat\_server nodes.
+    
+    \item It spawns the chat\_server application processes on the remote nodes.
+\end{itemize}
+
+The master application process runs on the same node as the Nginx load balancer.

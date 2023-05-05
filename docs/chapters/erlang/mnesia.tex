@@ -1,0 +1,20 @@
+Mnesia is a true \textbf{distributed DBMS} that we used to store chatrooms informations in a table.\\
+These informations were \textbf{distributed over all the erlang nodes}, using \textit{ram\_copies} as a \textbf{storage option}.\\
+How explained in the \textbf{Mnesia documentation}, the \textit{ram\_copies} storage option allows us to specify a list of nodes where this table is supposed to have \textbf{RAM copies}. A table replica of type \textit{ram\_copies} is \textbf{not written to disc} on a per transaction basis.\\
+A \textbf{table with the cluster schema} of the Erlang nodes, however, \textbf{is stored on the disk} of the master node, this schema will be used by the master to identify the cluster nodes on which to run the distributed Mnesia DB.\\
+
+As previously anticipated, there is \textbf{only one table in the database}, \textbf{\textit{online\_students}}, whose type is bag.\\
+The attributes of this table are \textit{course\_id, student\_pid, student\_name} and \textit{hostname}. course\_id is the key of this table.\\
+The data in this table is used to \textbf{keep track}, for each course, of all \textbf{students that join the chatrooms}.\\
+\textbf{Through the use of different queries}, on this table, it is possible to retrieve the online student at any given time in order to send them messages and it is also possible to handle other needs to better manage the chatrooms behavior. \\
+
+More in detail, the queries we implemented are:
+\begin{itemize}
+    \item \textit{join\_course}, which \textbf{adds a student} to a course chatroom;
+    \item \textit{get\_online\_pid}, which returns the pids of students currently online in a chatroom, which is a particularly useful query for figuring out \textbf{to which erlang processes forward messages};
+    \item \textit{get\_online\_students}, which \textbf{returns the usernames of students currently online in a chatroom}, these usernames will then be returned to the client in order to show the online students;
+    \item \textit{logout}, which \textbf{removes a student} from the related course chatroom;
+    \item \textit{remove\_logged\_students\_by\_hostname},  that \textbf{recursively removes all users} in each chatroom, \textbf{from a given node}.\\
+    In fact, this last query allows us to \textbf{ guarantee a state of eventual consistency after a node crash}, which would \textbf{otherwise introduce duplicates when it is restarted}.
+\end{itemize}
+

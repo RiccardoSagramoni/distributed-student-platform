@@ -1,0 +1,9 @@
+In the Maven projects \textbf{ejb-interfaces} and \textbf{ejb}, we had to introduce some \textit{Plain Old Java Objects} (\textbf{POJOs}) in order to efficiently share data between EJBs and Servlets and to separate different concerns:
+
+\begin{itemize}
+    \item Package \texttt{dto} (project \textit{ejb-interfaces}): contains all the \textbf{Data Transfer Objects} (DTOs) necessary to transfer information from the business logic tier to the presentation tier. The chosen approach was to develop a separate DTO for every single information, in order to minimize the transferred data and to better separate each concern.
+    
+    \item Package \texttt{enums} (project \textit{ejb-interfaces}): contains the \textit{UserRole} enum class, needed to correctly identify the role of an user (student, professor, admin).
+    
+    \item Package \texttt{dao} (project \textit{ejb}): contains the \textbf{Data Access Object} (DAO) responsible for all the data accesses concerning the booking of meetings. The reason only one DAO has been implemented stems from the fact that BookedMeetinEJB is the only EJB that provides a business logic beyond the simple database access, by manipulating data to make the low-level implementation transparent with regards to the presentation tier. 
+\end{itemize}

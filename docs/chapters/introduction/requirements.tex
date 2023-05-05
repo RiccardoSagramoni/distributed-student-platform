@@ -1,0 +1,57 @@
+In our web-application, four types of actors exist:
+\begin{enumerate}
+    \item Unregistered student
+    \item Students
+    \item Professors
+    \item Admin
+\end{enumerate}
+\ \\
+The operation that each kind of actor can perform in the application are the following.
+\begin{enumerate}
+    \item An \textbf{unregistered student} can:
+    \begin{itemize}
+        \item create an account
+    \end{itemize}
+    \item A \textbf{student} can:
+    \begin{itemize}
+        \item login/logout
+        \item browse courses by course name
+        \item see his starred course
+        \item see and manage his booked meetings
+        \item select a course in order to:
+        \begin{itemize}
+            \item view course details
+            \item star that course
+            \item enter the course chatroom
+            \item book a meeting for that course
+        \end{itemize}
+    \end{itemize}
+    \item A \textbf{professor} can:
+    \begin{itemize}
+        \item login/logout
+        \item see and manage his booked meetings
+        \item create a new course selecting specific time-slots
+        \item delete a course
+    \end{itemize}
+    \item The \textbf{admin} can:
+    \begin{itemize}
+        \item login/logout
+        \item create professor account
+        \item browse users by username and ban them
+    \end{itemize}
+\end{enumerate}
+\ \\
+For what concerns \textbf{non-functional requirements} we have, \textbf{for the web-app}:
+\begin{itemize}
+    \item Concurrent service accesses management
+    \item Strong consistency for users, courses and meetings data stored in MySQL DB
+\end{itemize}
+and, \textbf{for the chatroom}:
+\begin{itemize}
+    \item Concurrent service accesses management
+    \item High service availability
+    \item Fault tolerance to node faults
+    \item Allow high horizontal scalability
+    \item Eventual consistency for chatroom state data
+\end{itemize}
+\newpage

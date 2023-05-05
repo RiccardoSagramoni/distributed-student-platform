@@ -1,0 +1,21 @@
+As we anticipated in the section \vref{subsubsec:erlang/Client-server communication}. there is a message exchange between the browser client and the cowboy websocket handler.\\
+The browser client sends and receives messages via a \textbf{websocket} that is implemented through \textbf{Javascipt}.\\
+This websocket was created by using the \textbf{WebSocket API}, which provides methods and events to handle websocket connections.\\
+We matched these methods and events with functions that handled them and included additional functions to make the chatroom work properly.\\
+
+The functions that invoke the \textbf{creation and closure of the websocket} are:
+\begin{itemize}
+    \item \textit{connect(\_logged\_user, \_course)}, which is responsible for \textbf{creating the websocket and associating each method with the function that handles it}. This function is \textbf{called with the onload} of the body of the corresponding html page;
+    \item \textit{disconnect()}, which is responsible for \textbf{invoking the websocket connection closure} and the function that handles the latter. This function is \textbf{called with the onunload} of the body of the corresponding html page. \\
+\end{itemize}
+
+The functions that \textbf{handle the websocket connection} are:
+\begin{itemize}
+    \item \textit{openWebsocketConnection()}, it \textbf{starts the connection with websocket}, sending the login message and also call of the refreshWebsocketConnection() function;
+    \item  \textit{closeWebsocketConnection()}, is invoked when the \textbf{connection with the websocket is closed} and also call of the stopRefreshWebsocketConnection(). In addition This function tries to create a new websocket connection \textbf{in case the previous connection is involuntarily closed}, for example, after the Erlang Node, to which it was connected, \textbf{crashes};
+    \item  \textit{refreshWebsocketConnection()}, it executes an \textbf{automatic refresh of the websocket connection} every 10 sec by sending GET\_ONLINE\_USERS message through the websocket connection;
+    \item \textit{stopRefreshWebsocketConnection()}, it \textbf{stops the automatic refresh of the websocket connection};
+    \item \textit{sendObjectThroughWebsocket(isWebsocketConfigurationMessage, ...args)},\\ it \textbf{creates and sends a JSON object} through the websocket connection;
+    \item \textit{receiveObjectThroughWebsocket(event)}, it \textbf{handles the receive event of a JSON object}, parse it and executes the action provided by the opcode parameter of the object;
+    \item \textit{handleWebsocketError()}, it \textbf{handles the possible errors} with the websocket connection.
+\end{itemize}

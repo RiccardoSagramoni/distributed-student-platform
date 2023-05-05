@@ -1,0 +1,51 @@
+\documentclass[a4paper,12pt]{report} % for final document
+%\documentclass[draft, a4paper,12pt]{report} % for drafts
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[parfill]{parskip}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{svg}
+\usepackage[bookmarks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=blue,
+    pdftitle={DSMT documentation}
+}
+\usepackage{geometry}
+\geometry{
+     a4paper,
+     total={160mm,247mm},
+     left=25mm,
+     top=25mm,
+ }
+\usepackage{microtype} % improves line filling [raccomended]
+\usepackage{listings} % highlights code
+\usepackage{bookmark} %improve bookmarks
+\usepackage[english]{babel} % language
+\usepackage[english]{varioref} % for relative reference (vref)
+\usepackage[justification=centering]{caption} % for centering the captions
+\usepackage{fancyvrb} % for better verbatim
+ 
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+
+\begin{document}
+
+    % HEADER
+    \include{chapters/Header}
+    \newpage
+    \tableofcontents
+    %\printbibliography
+
+    % CHAPTERS
+    \include{chapters/ProjectSpecifications}
+    \include{chapters/SystemArchitecture}
+    \include{chapters/UserManual}
+    
+\end{document}
