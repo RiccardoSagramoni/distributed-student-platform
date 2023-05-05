@@ -6,7 +6,7 @@
 
 % Start supervisor
 start_link() ->
-    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 
 %% sup_flags() = #{strategy => strategy(),         % optional
@@ -19,14 +19,14 @@ start_link() ->
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
 init([]) ->
-    % Supervisor parameters
-    SupFlags = #{strategy => one_for_one,
-                 intensity => 1,
-                 period => 60},
-    % Specs for child processes
-    CowboyListener = #{id => cowboy_listener, % child process name
-                        start => {cowboy_listener, start_link, []}, % function that will be executed
-                        restart => permanent}, % always restart when crashes
-    ChildSpecs = [CowboyListener],
-    % Return value
-    {ok, {SupFlags, ChildSpecs}}.
+	% Supervisor parameters
+	SupFlags = #{strategy => one_for_one,
+				 intensity => 1,
+				 period => 60},
+	% Specs for child processes
+	CowboyListener = #{id => cowboy_listener, % child process name
+						start => {cowboy_listener, start_link, []}, % function that will be executed
+						restart => permanent}, % always restart when crashes
+	ChildSpecs = [CowboyListener],
+	% Return value
+	{ok, {SupFlags, ChildSpecs}}.

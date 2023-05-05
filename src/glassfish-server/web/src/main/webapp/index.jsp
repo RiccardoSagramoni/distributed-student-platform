@@ -4,6 +4,7 @@
 <%@ page import="it.unipi.dsmt.student_platform.utility.ClientRedirector" %>
 <%@ page import="it.unipi.dsmt.student_platform.dto.LoggedUserDTO" %>
 <%@ page import="it.unipi.dsmt.student_platform.utility.AccessController" %>
+<%@ page import="it.unipi.dsmt.student_platform.servlets.common.LoginServlet" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -50,7 +51,7 @@
 <%
     // Check if the user failed the login
 	String rParam = request.getParameter("r");
-    if (rParam != null && rParam.equals("error")) {
+    if (rParam != null && rParam.equals(LoginServlet.errorAttribute)) {
 %>
     <script>
         alert("Error: failed login");
